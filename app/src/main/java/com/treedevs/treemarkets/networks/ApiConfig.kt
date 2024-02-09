@@ -17,7 +17,7 @@ class ApiConfig {
 
             //TODO : Sesuaikan dengan base URL yang telah dibuat sebelumnya
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.67/mahasiswaAPI/api/")
+                .baseUrl("https://markets.treedevs.my.id/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
