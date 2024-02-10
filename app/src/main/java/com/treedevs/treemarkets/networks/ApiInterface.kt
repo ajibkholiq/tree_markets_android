@@ -11,20 +11,32 @@ interface ApiInterface {
     fun getBarang(): Call<BarangReponse<DataBarang>>
     @GET("barang")
     fun getAllBarang(): Call<BarangReponse<DataBarang>>
-    @Multipart
+    @FormUrlEncoded
     @POST("barang")
     fun postBarang(
-        @Path("uuid") uuid: String,
-
-    ): Call<InputResponse>
-    @Multipart
-    @PUT("barang/{uuid}")
-    fun editBarang(
-        @Path("uuid") uuid: String,
+        @Field("nama") nama: String,
+        @Field("kategori") kategori: String,
+        @Field("jumlah") jumlah: String,
+        @Field("harga") harga: String,
+        @Field("deskripsi") deskripsi: String,
 
     ): Call<InputResponse>
     @FormUrlEncoded
-    @HTTP(method = "DELETE", path = "Delete_mahasiswa/{uuid}", hasBody = true)
-    fun deleteMahasiswa(@Path("uuid") uuid : String?): Call<InputResponse>
+    @PUT("barang/{uuid}")
+    fun editBarang(
+        @Path("uuid") uuid: String,
+        @Field("nama") nama: String,
+        @Field("kategori") kategori: String,
+        @Field("harga") jumlah: String,
+        @Field("jumlah") harga: String,
+        @Field("deskripsi") deskrisi: String,
+
+    ): Call<InputResponse>
+//    @FormUrlEncoded
+    @DELETE("barang/{uuid}")
+//    @HTTP(method = "DELETE", path = "barang/{uuid}")
+    fun deleteBarang(
+
+        @Path("uuid") uuid : String?): Call<InputResponse>
 
 }

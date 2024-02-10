@@ -17,11 +17,31 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Input Data mahasiswa"
+            android:text="Input Data Barang"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textuuid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="UUID"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/edtUuid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textuuid" />
 
         <TextView
             android:id="@+id/textView2"
@@ -29,12 +49,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="NPM :"
+            android:text="Nama Barang"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/edtUuid" />
 
         <EditText
-            android:id="@+id/edtNpm"
+            android:id="@+id/edtBarang"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -50,17 +70,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Nama :"
+            android:text="Jumlah"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtNpm" />
+            app:layout_constraintTop_toBottomOf="@+id/edtBarang" />
 
         <EditText
-            android:id="@+id/edtNama"
+            android:id="@+id/edtJumlah"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -71,17 +92,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Alamat :"
+            android:text="Harga"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtNama" />
+            app:layout_constraintTop_toBottomOf="@+id/edtJumlah" />
 
         <EditText
-            android:id="@+id/edtAlamat"
+            android:id="@+id/edtHarga"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -92,14 +114,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="nilai :"
+            android:text="deskripsi"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtAlamat" />
+            app:layout_constraintTop_toBottomOf="@+id/edtHarga" />
 
         <EditText
-            android:id="@+id/edtNilai"
+            android:id="@+id/edtdeskripsi"
             android:layout_width="0dp"
-            android:inputType="number"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -120,7 +141,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnDelete"
             app:layout_constraintStart_toEndOf="@+id/btnUpdate"
-            app:layout_constraintTop_toBottomOf="@+id/edtNilai"
+            app:layout_constraintTop_toBottomOf="@+id/edtdeskripsi"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
@@ -133,7 +154,7 @@
             android:text="Delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtNilai" />
+            app:layout_constraintTop_toBottomOf="@+id/edtdeskripsi" />
 
         <Button
             android:id="@+id/btnUpdate"
@@ -145,7 +166,7 @@
             android:text="Update"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtNilai" />
+            app:layout_constraintTop_toBottomOf="@+id/edtdeskripsi" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

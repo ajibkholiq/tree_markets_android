@@ -39,6 +39,9 @@ class AdapterBarang : RecyclerView.Adapter<AdapterBarang.ViewHolder>() {
                 .diskCacheStrategy(DiskCacheStrategy.ALL) // Optional: Cache image
                 .into(image)
         }
+        holder.binding.carditem.setOnClickListener {
+            onItemClick?.invoke(data)
+        }
 }
     override fun getItemCount(): Int = listData.size
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

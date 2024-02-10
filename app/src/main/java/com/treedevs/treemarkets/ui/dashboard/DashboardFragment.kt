@@ -20,10 +20,17 @@ class DashboardFragment : Fragment() {
     private val mainViewModel: DashboardViewModel by viewModels()
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
+    //dialog
     var dialogBuilder: AlertDialog? = null
-
     private var dialogBinding : PopupBinding? = null
     private val bindingDialog get() = dialogBinding!!
+
+    lateinit var uuid :String
+    lateinit var barang :String
+    lateinit var jumlah :String
+    lateinit var harga :String
+    lateinit var deskripsi:String
+
 //    val binding: FragmentDashboardBinding = FragmentDashboardBinding.inflate(layoutInflater)
 
     override fun onCreateView(
@@ -31,7 +38,8 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        _binding = FragmentDashboardBinding.inflate(inflater,container,false)
+        val rootView = binding.root
 
         // Access RecyclerView from the inflated layout
         val recyclerView: RecyclerView = rootView.findViewById(R.id.itemsb)
@@ -39,16 +47,21 @@ class DashboardFragment : Fragment() {
         // Set layout manager and adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         val adapter = AdapterBarang() // data is your list of items
-//        binding.btnTambah.setOnClickListener{
-//            showdialog()
-//        }
+        binding.btnTambah.setOnClickListener{
+            showdialog("new")
+        }
         mainViewModel.barang.observe(viewLifecycleOwner) {
             adapter.setData(it)
         }
         recyclerView.adapter = adapter
 
         adapter.onItemClick = {
-
+            barang = it.nama
+            jumlah = it.jumlah
+            harga = it.harga
+            deskripsi = it.deskripsi
+            uuid = it.uuid
+            showdialog("Edit")
         }
         return rootView
     }
@@ -56,11 +69,78 @@ class DashboardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        dialogBinding = null
+        dialogBuilder?.dismiss() // Dismiss dialog to avoid potential window leaks
+        dialogBuilder = null
     }
 
-    private fun showdialog(){
+    private fun showdialog(flag :String){
         dialogBuilder = AlertDialog.Builder(requireContext()).create()
         dialogBinding = PopupBinding.inflate(layoutInflater)
+        if (flag.equals("Edit")){
+            bindingDialog.btnInput.visibility = View.GONE
+            bindingDialog.btnDelete.visibility = View.VISIBLE
+            bindingDialog.btnUpdate.visibility = View.VISIBLE
+            bindingDialog.edtUuid.isEnabled = false
+            bindingDialog.edtBarang.isFocusable = true
+
+            bindingDialog.edtUuid.setText(uuid)
+            bindingDialog.edtBarang.setText(barang)
+            bindingDialog.edtJumlah.setText(jumlah)
+            bindingDialog.edtHarga.setText(harga)
+            bindingDialog.edtdeskripsi.setText(deskripsi)
+
+        }else{
+            bindingDialog.textuuid.visibility = View.GONE
+            bindingDialog.edtUuid.visibility = View.GONE
+            bindingDialog.btnInput.visibility = View.VISIBLE
+            bindingDialog.btnDelete.visibility = View.GONE
+            bindingDialog.btnUpdate.visibility = View.GONE
+        }
+
+        dialogBinding?.btnInput?.setOnClickListener {
+
+            val iBarang = bindingDialog.edtBarang.text.toString()
+            val iJumlah = bindingDialog.edtJumlah.text.toString()
+            val iHarga = bindingDialog.edtHarga.text.toString()
+            val iDeskripsi = bindingDialog.edtdeskripsi.text.toString()
+
+            mainViewModel.postBarang(iBarang, iJumlah, iHarga, iDeskripsi)
+            mainViewModel.getBarang()
+            dialogBuilder?.dismiss()
+
+
+        }
+
+        dialogBinding?.btnUpdate?.setOnClickListener {
+            val eUuid = uuid
+            val iBarang = bindingDialog.edtBarang.text.toString()
+            val iJumlah = bindingDialog.edtJumlah.text.toString()
+            val iHarga = bindingDialog.edtHarga.text.toString()
+            val iDeskripsi = bindingDialog.edtdeskripsi.text.toString()
+
+            mainViewModel.editBarang(eUuid, iBarang, iJumlah, iHarga,iDeskripsi)
+            mainViewModel.getBarang()
+//            val adapter = AdapterBarang() // data is your list of items
+//            mainViewModel.barang.observe(viewLifecycleOwner) {
+//                adapter.setData(it)
+//            }
+
+            dialogBuilder?.dismiss()
+
+
+        }
+
+        dialogBinding?.btnDelete?.setOnClickListener {
+
+            mainViewModel.deleteBarang(uuid)
+
+            dialogBuilder?.dismiss()
+
+
+        }
+
+
         dialogBuilder?.setView(bindingDialog.root)
         dialogBuilder?.show()
 
