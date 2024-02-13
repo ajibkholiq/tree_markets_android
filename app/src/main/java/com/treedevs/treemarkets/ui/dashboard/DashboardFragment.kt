@@ -98,6 +98,7 @@ class DashboardFragment : Fragment() {
             bindingDialog.btnUpdate.visibility = View.GONE
         }
 
+      
         dialogBinding?.btnInput?.setOnClickListener {
 
             val iBarang = bindingDialog.edtBarang.text.toString()
@@ -119,7 +120,7 @@ class DashboardFragment : Fragment() {
             val iHarga = bindingDialog.edtHarga.text.toString()
             val iDeskripsi = bindingDialog.edtdeskripsi.text.toString()
 
-            mainViewModel.editBarang(eUuid, iBarang, iJumlah, iHarga,iDeskripsi)
+            mainViewModel.editBarang(eUuid, iBarang, iHarga,iJumlah, iDeskripsi)
             mainViewModel.getBarang()
 //            val adapter = AdapterBarang() // data is your list of items
 //            mainViewModel.barang.observe(viewLifecycleOwner) {

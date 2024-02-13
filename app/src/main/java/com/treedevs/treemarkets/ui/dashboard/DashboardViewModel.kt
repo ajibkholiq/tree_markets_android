@@ -75,8 +75,8 @@ class DashboardViewModel : ViewModel() {
         })
 
     }
-    fun editBarang(uuid: String ,nama: String, jumlah: String, harga :String, deskripsi : String){
-        val client = ApiConfig.getApiService().editBarang(uuid,nama,"1" ,jumlah, harga, deskripsi)
+    fun editBarang(uuid: String ,nama: String,  harga :String, jumlah: String, deskripsi : String){
+        val client = ApiConfig.getApiService().editBarang(uuid,nama,"1" ,harga,jumlah ,deskripsi)
         client.enqueue(object : Callback<InputResponse>{
             override fun onResponse(call: Call<InputResponse>, response: Response<InputResponse>) {
                 if (response.isSuccessful){
